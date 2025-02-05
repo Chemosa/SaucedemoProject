@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class SauceDemoTest {
     @Test
-    public void loginAddToCart () {
+    public void checkProductNameAndPriceInCart() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
@@ -19,8 +19,8 @@ public class SauceDemoTest {
         driver.findElement(By.className("shopping_cart_link")).click();
 
         String productNameInCart = driver.findElement(By.xpath("//*[@id=\"item_1_title_link\"]")).getText();
-        Assert.assertEquals(productNameInCart, "Sauce Labs Bolt T-Shirt");
         String productPriceInCart = driver.findElement(By.xpath("//*[@data-test='inventory-item-price']")).getText();
+        Assert.assertEquals(productNameInCart, "Sauce Labs Bolt T-Shirt");
         Assert.assertEquals(productPriceInCart, "$15.99");
 
         driver.quit();
