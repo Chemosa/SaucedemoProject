@@ -30,6 +30,4 @@ public class HeaderTest extends BaseTest{
         headerPage.clickLogout();
         Assert.assertEquals(driver.getCurrentUrl(), LOGIN_PAGE_URL);
     }
-
-
 }
