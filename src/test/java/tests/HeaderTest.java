@@ -9,7 +9,7 @@ public class HeaderTest extends BaseTest{
     public void checkLogoText() {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME, PASSWORD);
-        Assert.assertEquals(headerPage.logoTextInHeader(), LOGO);
+        Assert.assertEquals(headerPage.getLogoTextFromHeader(), LOGO);
     }
 
     @Test (description = "Check that 'All Items' link leads to https://www.saucedemo.com/inventory.html")
@@ -30,6 +30,4 @@ public class HeaderTest extends BaseTest{
         headerPage.clickLogout();
         Assert.assertEquals(driver.getCurrentUrl(), LOGIN_PAGE_URL);
     }
-
-
 }

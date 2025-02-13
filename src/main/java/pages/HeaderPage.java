@@ -18,7 +18,7 @@ public class HeaderPage extends BasePage {
     public void openShoppingCart() {
         driver.findElement(SHOPPING_CART_BUTTON).click();
     }
-    public String logoTextInHeader() {
+    public String getLogoTextFromHeader() {
         return driver.findElement(LOGO).getText();
     }
     public void openHiddenMenu() {

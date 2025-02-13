@@ -11,19 +11,18 @@ public class CartTest extends BaseTest {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.addToCart(SAUCE_LABS_BACKPACK);
         headerPage.openShoppingCart();
-        Assert.assertEquals(cartPage.getProductNameFromCart(0), SAUCE_LABS_BACKPACK);
-        Assert.assertEquals(cartPage.getProductPriceFromCart(0), "$29.99");
+        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
+        Assert.assertEquals(cartPage.getProductPriceFromCart(SAUCE_LABS_BACKPACK), "$29.99");
     }
 
     @Test (description = "Test that few products can be added to the Shopping cart.")
     public void addFewProductsToCart() {
         loginPage.openPage(LOGIN_PAGE_URL);
         loginPage.login(USERNAME, PASSWORD);
-        productsPage.addToCart(SAUCE_LABS_BACKPACK);
-        productsPage.addToCart(SAUCE_LABS_BIKE_LIGHT);
+        productsPage.addToCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
         headerPage.openShoppingCart();
-        Assert.assertEquals(cartPage.getProductNameFromCart(0), SAUCE_LABS_BACKPACK);
-        Assert.assertEquals(cartPage.getProductNameFromCart(1), SAUCE_LABS_BIKE_LIGHT);
+        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
+        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BIKE_LIGHT), SAUCE_LABS_BIKE_LIGHT);
     }
 
     @Test (description = "Check that product can be removed from Shopping cart.")
@@ -32,7 +31,7 @@ public class CartTest extends BaseTest {
         loginPage.login(USERNAME, PASSWORD);
         productsPage.addToCart(SAUCE_LABS_BACKPACK);
         headerPage.openShoppingCart();
-        cartPage.clickRemoveButton();
+        cartPage.clickRemoveButton(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(cartPage.listOfProductsInCart().isEmpty());
     }
 
@@ -53,4 +52,6 @@ public class CartTest extends BaseTest {
         cartPage.clickContinueShopping();
         Assert.assertEquals(driver.getCurrentUrl(), PRODUCTS_PAGE_URL);
     }
+
+
 }
