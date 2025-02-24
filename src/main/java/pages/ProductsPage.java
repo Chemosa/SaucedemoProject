@@ -15,20 +15,41 @@ public class ProductsPage extends HeaderPage {
         super(driver);
     }
 
-    public void addToCart(String... productNames) {
+    /**
+     * This method clicks on 'Add to Cart' buttons for all products, which names were conveyed to method.
+     * @param productNames
+     * @return
+     */
+    public ProductsPage addToCart(String... productNames) {
         for (String productName : productNames) {
             driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).click();
         }
+        return this;
     }
 
+    /**
+     * This method checks is 'Add to Cart' button is displayed on Products page.
+     * @param productName
+     * @return
+     */
     public boolean isAddToCartButtonDisplayed(String productName) {
         return driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).isDisplayed();
     }
 
+    /**
+     * This method checks is 'Remove' button is displayed on Products page.
+     * @param productName
+     * @return
+     */
     public boolean isRemoveButtonDisplayed(String productName) {
         return driver.findElement(By.xpath(String.format(REMOVE_PRODUCT_FROM_CART_BUTTON, productName))).isDisplayed();
     }
 
+    /**
+     * This method gets product prices from Products page.
+     * @param productName
+     * @return
+     */
     public String getProductPrice(String productName) {
         return driver.findElement(By.xpath(String.format(PRODUCT_PRICE, productName))).getText();
     }

@@ -18,31 +18,48 @@ public class CartPage extends HeaderPage {
         super(driver);
     }
 
+    /**
+     * This method gets name of the product from cart.
+     * @param productName
+     * @return
+     */
     public String getProductNameFromCart(String productName) {
         return driver.findElement(By.xpath(String.format(PRODUCT_NAME, productName))).getText();
     }
 
+    /**
+     * This method gets price of the product from cart.
+     * @param productName
+     * @return
+     */
     public String getProductPriceFromCart(String productName) {
         return driver.findElement(By.xpath(String.format(PRODUCT_PRICE, productName))).getText();
     }
 
+    /**
+     * This method makes list with all products from cart.
+     * @return
+     */
     public List<WebElement> listOfProductsInCart() {
         return driver.findElements(By.xpath(PRODUCT_ITEM));
     }
 
-    public void clickRemoveButton(String productName) {
+    /**
+     * This method click on 'Remove' button on Cart page
+     * @param productName
+     * @return
+     */
+    public CartPage clickRemoveButton(String productName) {
         driver.findElement(By.xpath(String.format(REMOVE_BUTTON, productName))).click();
+        return new CartPage(driver);
     }
 
-    public void clickContinueShopping() {
+    /**
+     * This method click on 'Continue Shopping' button and return to Product page
+     * @return
+     */
+    public ProductsPage clickContinueShopping() {
         driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
-    }
-
-    public void removeProductFromCart(String productName) {
-        driver.findElement(By.xpath(String.format(REMOVE_BUTTON, productName))).click();
-    }
-
-    public boolean isProductDisplayed(String productName) {
-        return !driver.findElements(By.xpath(String.format(PRODUCT_ITEM, productName))).isEmpty();
+        return new ProductsPage(driver);
     }
 }

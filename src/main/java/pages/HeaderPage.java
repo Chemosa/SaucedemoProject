@@ -15,19 +15,47 @@ public class HeaderPage extends BasePage {
         super(driver);
     }
 
-    public void openShoppingCart() {
+    /**
+     * This method clicks on 'Shopping Cart' button and leads to Cart page
+     * @return
+     */
+    public CartPage openShoppingCart() {
         driver.findElement(SHOPPING_CART_BUTTON).click();
+        return new CartPage(driver);
     }
+
+    /**
+     * This method gets text of Logo from the header.
+     * @return
+     */
     public String getLogoTextFromHeader() {
         return driver.findElement(LOGO).getText();
     }
-    public void openHiddenMenu() {
+
+    /**
+     * This method click on 'Burger' button and opens hidden menu.
+     * @return
+     */
+    public HeaderPage openHiddenMenu() {
         driver.findElement(OPEN_MENU).click();
+        return new HeaderPage(driver);
     }
-    public void clickAllItems() {
+
+    /**
+     * This method clicks on 'All Items' button and returns to Product page.
+     * @return
+     */
+    public ProductsPage clickAllItems() {
         driver.findElement(ALL_ITEMS_LINK).click();
+        return new ProductsPage(driver);
     }
-    public void clickLogout() {
+
+    /**
+     * This method clicks on 'Logout' button and returns to Login page
+     * @return
+     */
+    public LoginPage clickLogout() {
         driver.findElement(LOGOUT_LINK).click();
+        return new LoginPage(driver);
     }
 }
