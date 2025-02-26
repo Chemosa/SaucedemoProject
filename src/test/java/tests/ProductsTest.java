@@ -11,7 +11,6 @@ public class ProductsTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, PASSWORD);
         Assert.assertTrue(productsPage.isAddToCartButtonDisplayed(SAUCE_LABS_BOLT_T_SHIRT));
     }
@@ -21,7 +20,6 @@ public class ProductsTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addToCart(SAUCE_LABS_BOLT_T_SHIRT);
         Assert.assertTrue(productsPage.isRemoveButtonDisplayed(SAUCE_LABS_BOLT_T_SHIRT));

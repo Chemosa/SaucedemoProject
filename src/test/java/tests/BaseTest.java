@@ -17,7 +17,6 @@ public class BaseTest implements IConstants, ITestConstants {
     ProductsPage productsPage;
     CartPage cartPage;
     HeaderPage headerPage;
-    Waiter waiter;
 
 
     @BeforeMethod
@@ -27,7 +26,6 @@ public class BaseTest implements IConstants, ITestConstants {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         initPages();
-        waiter = new Waiter();
     }
 
     public void initPages() {

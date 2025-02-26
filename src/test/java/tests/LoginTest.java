@@ -14,7 +14,6 @@ public class LoginTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login("", PASSWORD);
         Assert.assertEquals(loginPage.getErrorMessageText(), EMPTY_IN_FIELD_USERNAME_ERROR_TEXT);
     }
@@ -24,7 +23,6 @@ public class LoginTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, "");
         Assert.assertEquals(loginPage.getErrorMessageText(), EMPTY_FIELD_PASSWORD_ERROR_TEXT);
     }
@@ -34,7 +32,6 @@ public class LoginTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login("", "");
         Assert.assertEquals(loginPage.getErrorMessageText(), EMPTY_IN_FIELD_USERNAME_ERROR_TEXT);
     }
@@ -44,7 +41,6 @@ public class LoginTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login("egrdgdg", "dgrgdrg");
         Assert.assertEquals(loginPage.getErrorMessageText(), INCORRECT_DATA_IN_FIELDS);
     }
@@ -57,8 +53,6 @@ public class LoginTest extends BaseTest {
                 .login(USERNAME, PASSWORD)
                 .openHiddenMenu()
                 .clickLogout();
-        loginPage
-                .waitForLoginPageOpened();
         driver.navigate().back();
         Assert.assertEquals(driver.getCurrentUrl(), LOGIN_PAGE_URL);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_MESSAGE_NAVIGATE_BACK_TO_PRODUCTS);

@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HeaderPage extends BasePage {
 
@@ -10,6 +12,13 @@ public class HeaderPage extends BasePage {
     public static final By OPEN_MENU = By.id("react-burger-menu-btn");
     public static final By ALL_ITEMS_LINK = By.id("inventory_sidebar_link");
     public static final By LOGOUT_LINK = By.id("logout_sidebar_link");
+
+    @FindBy(id = "continue-shopping")
+    WebElement continueShoppingButton;
+
+    @FindBy(className = "submit-button")
+    WebElement loginButton;
+
 
     public HeaderPage(WebDriver driver) {
         super(driver);
@@ -21,6 +30,7 @@ public class HeaderPage extends BasePage {
      */
     public CartPage openShoppingCart() {
         driver.findElement(SHOPPING_CART_BUTTON).click();
+        waiter.waitForPageOpened(driver, continueShoppingButton, 15);
         return new CartPage(driver);
     }
 
@@ -56,6 +66,7 @@ public class HeaderPage extends BasePage {
      */
     public LoginPage clickLogout() {
         driver.findElement(LOGOUT_LINK).click();
+        waiter.waitForPageOpened(driver, loginButton, 15);
         return new LoginPage(driver);
     }
 }

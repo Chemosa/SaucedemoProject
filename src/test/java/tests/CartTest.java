@@ -3,8 +3,6 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static pages.CartPage.CONTINUE_SHOPPING_BUTTON;
-
 
 public class CartTest extends BaseTest {
 
@@ -13,11 +11,9 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addToCart(SAUCE_LABS_BACKPACK)
                 .openShoppingCart();
-        waiter.waitForPageOpened(driver, CONTINUE_SHOPPING_BUTTON, 10);
         Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
         Assert.assertEquals(cartPage.getProductPriceFromCart(SAUCE_LABS_BACKPACK), "$29.99");
     }
@@ -27,11 +23,9 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addToCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT)
                 .openShoppingCart();
-        waiter.waitForPageOpened(driver, CONTINUE_SHOPPING_BUTTON, 10);
         Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
         Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BIKE_LIGHT), SAUCE_LABS_BIKE_LIGHT);
     }
@@ -41,7 +35,6 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addToCart(SAUCE_LABS_BACKPACK)
                 .openShoppingCart()
@@ -54,7 +47,6 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, PASSWORD)
                 .openShoppingCart();
         Assert.assertTrue(cartPage.listOfProductsInCart().isEmpty());
@@ -65,7 +57,6 @@ public class CartTest extends BaseTest {
         loginPage
                 .openPage(LOGIN_PAGE_URL);
         loginPage
-                .waitForLoginPageOpened()
                 .login(USERNAME, PASSWORD)
                 .addToCart(SAUCE_LABS_BACKPACK)
                 .openShoppingCart()

@@ -1,13 +1,9 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
@@ -35,6 +31,7 @@ public class LoginPage extends BasePage {
      * @return
      */
     public ProductsPage login(String username, String password) {
+        waiter.waitForPageOpened(driver, loginButton, 15);
         usernameInput.sendKeys(username);
         passwordInput.sendKeys(password);
         loginButton.click();
@@ -47,11 +44,5 @@ public class LoginPage extends BasePage {
      */
     public String getErrorMessageText() {
         return errorMessage.getText();
-    }
-
-    public LoginPage waitForLoginPageOpened() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(loginButton));
-        return new LoginPage(driver);
     }
 }

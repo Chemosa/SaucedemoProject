@@ -3,6 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 
 public class CartPage extends HeaderPage {
@@ -12,7 +14,10 @@ public class CartPage extends HeaderPage {
     private static final String PRODUCT_QUANTITY = PRODUCT_ITEM + "//*[@class=\"cart_quantity\"]";
     private static final String REMOVE_BUTTON = PRODUCT_ITEM + "//button";
     private static final String CART_ITEM_CONTAINER = "//*[@class='cart_item']";
-    public static final By CONTINUE_SHOPPING_BUTTON = By.id("continue-shopping");
+
+    @FindBy(id = "continue-shopping")
+    WebElement continueShoppingButton;
+
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -59,7 +64,7 @@ public class CartPage extends HeaderPage {
      * @return
      */
     public ProductsPage clickContinueShopping() {
-        driver.findElement(CONTINUE_SHOPPING_BUTTON).click();
+        continueShoppingButton.click();
         return new ProductsPage(driver);
     }
 }
