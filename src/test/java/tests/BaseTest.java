@@ -6,10 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.CartPage;
-import pages.HeaderPage;
-import pages.LoginPage;
-import pages.ProductsPage;
+import pages.*;
+import waiters.Waiter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +17,7 @@ public class BaseTest implements IConstants, ITestConstants {
     ProductsPage productsPage;
     CartPage cartPage;
     HeaderPage headerPage;
+
 
     @BeforeMethod
     public void initTest() {

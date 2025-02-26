@@ -1,28 +1,48 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
 
 public class LoginPage extends BasePage {
-    public static final By USERNAME_INPUT = By.xpath("//*[@data-test='username']");
-    public static final By PASSWORD_INPUT = By.name("password");
-    public static final By LOGIN_BUTTON = By.className("submit-button");
-    public static final By ERROR_MESSAGE = By.xpath("//*[@data-test='error']");
-    public static final String EMPTY_FIELD_PASSWORD_ERROR_TEXT = "Epic sadface: Password is required";
-    public static final String EMPTY_IN_FIELD_USERNAME_ERROR_TEXT = "Epic sadface: Username is required";
-    public static final String INCORRECT_DATA_IN_FIELDS = "Epic sadface: Username and password do not match any user in this service";
+
+    @FindBy(xpath = "//*[@data-test='username']")
+    WebElement usernameInput;
+
+    @FindBy(name = "password")
+    WebElement passwordInput;
+
+    @FindBy(className = "submit-button")
+    WebElement loginButton;
+
+    @FindBy(xpath = "//*[@data-test='error']")
+    WebElement errorMessage;
+
 
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
-    public void login(String username, String password) {
-        driver.findElement(USERNAME_INPUT).sendKeys(username);
-        driver.findElement(PASSWORD_INPUT).sendKeys(password);
-        driver.findElement(LOGIN_BUTTON).click();
+    /**
+     * This method performs login with inputted credentials.
+     * @param username
+     * @param password
+     * @return
+     */
+    public ProductsPage login(String username, String password) {
+        waiter.waitForPageOpened(driver, loginButton, 15);
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
+        loginButton.click();
+        return new ProductsPage(driver);
     }
 
+    /**
+     * This method gets error messages from Login page.
+     * @return
+     */
     public String getErrorMessageText() {
-        return driver.findElement(ERROR_MESSAGE).getText();
+        return errorMessage.getText();
     }
 }

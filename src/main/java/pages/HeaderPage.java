@@ -2,6 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class HeaderPage extends BasePage {
 
@@ -11,23 +13,60 @@ public class HeaderPage extends BasePage {
     public static final By ALL_ITEMS_LINK = By.id("inventory_sidebar_link");
     public static final By LOGOUT_LINK = By.id("logout_sidebar_link");
 
+    @FindBy(id = "continue-shopping")
+    WebElement continueShoppingButton;
+
+    @FindBy(className = "submit-button")
+    WebElement loginButton;
+
+
     public HeaderPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openShoppingCart() {
+    /**
+     * This method clicks on 'Shopping Cart' button and leads to Cart page
+     * @return
+     */
+    public CartPage openShoppingCart() {
         driver.findElement(SHOPPING_CART_BUTTON).click();
+        waiter.waitForPageOpened(driver, continueShoppingButton, 15);
+        return new CartPage(driver);
     }
+
+    /**
+     * This method gets text of Logo from the header.
+     * @return
+     */
     public String getLogoTextFromHeader() {
         return driver.findElement(LOGO).getText();
     }
-    public void openHiddenMenu() {
+
+    /**
+     * This method click on 'Burger' button and opens hidden menu.
+     * @return
+     */
+    public HeaderPage openHiddenMenu() {
         driver.findElement(OPEN_MENU).click();
+        return new HeaderPage(driver);
     }
-    public void clickAllItems() {
+
+    /**
+     * This method clicks on 'All Items' button and returns to Product page.
+     * @return
+     */
+    public ProductsPage clickAllItems() {
         driver.findElement(ALL_ITEMS_LINK).click();
+        return new ProductsPage(driver);
     }
-    public void clickLogout() {
+
+    /**
+     * This method clicks on 'Logout' button and returns to Login page
+     * @return
+     */
+    public LoginPage clickLogout() {
         driver.findElement(LOGOUT_LINK).click();
+        waiter.waitForPageOpened(driver, loginButton, 15);
+        return new LoginPage(driver);
     }
 }
