@@ -1,5 +1,6 @@
 package pages;
 
+import entity.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +23,13 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+    }
+
+    public ProductsPage login(User user) {
+        usernameInput.sendKeys(user.getUsername());
+        passwordInput.sendKeys(user.getPassword());
+        loginButton.click();
+        return new ProductsPage(driver);
     }
 
     /**

@@ -7,9 +7,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import pages.*;
-import waiters.Waiter;
+import steps.CartSteps;
+import steps.HeaderSteps;
+import steps.LoginSteps;
+import steps.ProductsSteps;
 
 import java.util.concurrent.TimeUnit;
+
 
 public class BaseTest implements IConstants, ITestConstants {
     WebDriver driver;
@@ -17,7 +21,10 @@ public class BaseTest implements IConstants, ITestConstants {
     ProductsPage productsPage;
     CartPage cartPage;
     HeaderPage headerPage;
-
+    LoginSteps loginSteps;
+    ProductsSteps productsSteps;
+    HeaderSteps headerSteps;
+    CartSteps cartSteps;
 
     @BeforeMethod
     public void initTest() {
@@ -33,6 +40,10 @@ public class BaseTest implements IConstants, ITestConstants {
         productsPage = new ProductsPage(driver);
         cartPage = new CartPage(driver);
         headerPage = new HeaderPage(driver);
+        loginSteps = new LoginSteps(driver);
+        productsSteps = new ProductsSteps(driver);
+        headerSteps = new HeaderSteps(driver);
+        cartSteps = new CartSteps(driver);
     }
 
     @AfterMethod
