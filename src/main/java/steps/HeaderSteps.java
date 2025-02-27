@@ -18,21 +18,17 @@ public class HeaderSteps {
     }
 
     @Step("Login, add product by name and open shopping cart")
-    public HeaderSteps loginAddProductToCartAndOpenShoppingCart(User user, String... productName) {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(user)
-                .addToCart(productName)
-                .openShoppingCart();
+    public HeaderSteps openShoppingCart() {
+        headerPage.openShoppingCart();
         return this;
     }
 
     @Step("Open hidden menu and click Logout")
-    public HeaderSteps openHiddenMenuPressLogout() {
+    public HeaderSteps openHiddenMenuPressLogoutNavigateBack() {
        headerPage
-                .openHiddenMenu()
-                .clickLogout();
+               .openHiddenMenu()
+               .clickLogout()
+               .navigateBack();
         return this;
     }
 

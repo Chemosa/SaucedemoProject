@@ -36,8 +36,7 @@ public class LoginTest extends Preconditions {
     @Test (description = "Check that after logout user can NOT navigate back to Products page without login")
     public void navigateBackAfterLogout() {
         loginSteps.loginAndWaitForPageOpened(userSuccess);
-        headerSteps.openHiddenMenuPressLogout();
-        driver.navigate().back();
+        headerSteps.openHiddenMenuPressLogoutNavigateBack();
         Assert.assertEquals(driver.getCurrentUrl(), LOGIN_PAGE_URL);
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_MESSAGE_NAVIGATE_BACK_TO_PRODUCTS);
     }

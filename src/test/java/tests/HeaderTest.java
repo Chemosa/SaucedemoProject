@@ -14,8 +14,9 @@ public class HeaderTest extends Preconditions{
 
     @Test (description = "Check that 'All Items' link leads to https://www.saucedemo.com/inventory.html")
     public void clickAllItemsLink() {
+        loginSteps.loginAndWaitForPageOpened(userSuccess);
         headerSteps
-                .loginAddProductToCartAndOpenShoppingCart(userSuccess)
+                .openShoppingCart()
                 .openHiddenMenuPressAllItems();
         Assert.assertEquals(driver.getCurrentUrl(), PRODUCTS_PAGE_URL);
     }
@@ -23,7 +24,7 @@ public class HeaderTest extends Preconditions{
     @Test (description = "Check work of Logout")
     public void checkLogout() {
         loginSteps.loginAndWaitForPageOpened(userSuccess);
-        headerSteps.openHiddenMenuPressLogout();
+        headerSteps.openHiddenMenuPressLogoutNavigateBack();
         Assert.assertEquals(driver.getCurrentUrl(), LOGIN_PAGE_URL);
     }
 }
