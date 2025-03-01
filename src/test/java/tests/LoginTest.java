@@ -12,22 +12,22 @@ public class LoginTest extends Preconditions {
     @Test(description = "QA-1 This test login on site without username")
     public void loginWithEmptyUsernameTest() {
         loginSteps.loginAndWaitForPageOpened(userWithEmptyUsername);
-        Assert.assertEquals(loginPage.getErrorMessageText(), EMPTY_IN_FIELD_USERNAME_ERROR_TEXT);
+        Assert.assertEquals(loginPage.getErrorMessageText(), "dhvdjvbdjvd");
     }
 
-    @Test
+    @Test (description = "This test login on site without password")
     public void loginWithEmptyPasswordTest() {
         loginSteps.loginAndWaitForPageOpened(userWithEmptyPassword);
         Assert.assertEquals(loginPage.getErrorMessageText(), EMPTY_FIELD_PASSWORD_ERROR_TEXT);
     }
 
-    @Test
+    @Test(description = "This test login on site with empty fields")
     public void loginWithEmptyFieldsTest() {
         loginSteps.loginAndWaitForPageOpened(userEmptyFields);
         Assert.assertEquals(loginPage.getErrorMessageText(), EMPTY_IN_FIELD_USERNAME_ERROR_TEXT);
     }
 
-    @Test
+    @Test(description = "This test login on site with incorrect username and password")
     public void loginWithIncorrectFieldsTest() {
         loginSteps.loginAndWaitForPageOpened(userIncorrectFields);
         Assert.assertEquals(loginPage.getErrorMessageText(), INCORRECT_DATA_IN_FIELDS);
