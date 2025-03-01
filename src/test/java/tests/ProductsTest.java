@@ -4,24 +4,17 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class ProductsTest extends BaseTest {
+public class ProductsTest extends Preconditions {
 
     @Test
     public void isAddToCartButtonDisplayedTest() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD);
+        loginSteps.loginAndWaitForPageOpened(userSuccess);
         Assert.assertTrue(productsPage.isAddToCartButtonDisplayed(SAUCE_LABS_BOLT_T_SHIRT));
     }
 
     @Test
     public void isRemoveButtonDisplayedTest() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addToCart(SAUCE_LABS_BOLT_T_SHIRT);
-        Assert.assertTrue(productsPage.isRemoveButtonDisplayed(SAUCE_LABS_BOLT_T_SHIRT));
+       productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BOLT_T_SHIRT);
+       Assert.assertTrue(productsPage.isRemoveButtonDisplayed(SAUCE_LABS_BOLT_T_SHIRT));
     }
 }

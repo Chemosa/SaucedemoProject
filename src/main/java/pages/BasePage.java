@@ -18,4 +18,8 @@ public abstract class BasePage implements IConstants {
     public void openPage(String url) {
         driver.get(url);
     }
+
+    public void navigateBack() {
+        driver.navigate().back();
+    }
 }

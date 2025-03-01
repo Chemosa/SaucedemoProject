@@ -1,10 +1,13 @@
 package pages;
 
+import entity.User;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@Log4j2
 public class HeaderPage extends BasePage {
 
     public static final By SHOPPING_CART_BUTTON = By.id("shopping_cart_container");
@@ -15,9 +18,6 @@ public class HeaderPage extends BasePage {
 
     @FindBy(id = "continue-shopping")
     WebElement continueShoppingButton;
-
-    @FindBy(className = "submit-button")
-    WebElement loginButton;
 
 
     public HeaderPage(WebDriver driver) {
@@ -30,7 +30,7 @@ public class HeaderPage extends BasePage {
      */
     public CartPage openShoppingCart() {
         driver.findElement(SHOPPING_CART_BUTTON).click();
-        waiter.waitForPageOpened(driver, continueShoppingButton, 15);
+        waiter.waitForElementDisplayed(driver, continueShoppingButton, 15);
         return new CartPage(driver);
     }
 
@@ -66,7 +66,8 @@ public class HeaderPage extends BasePage {
      */
     public LoginPage clickLogout() {
         driver.findElement(LOGOUT_LINK).click();
-        waiter.waitForPageOpened(driver, loginButton, 15);
+        waiter.waitForPageOpened(driver, LOGIN_PAGE_URL, 15);
+        log.info("User was logout");
         return new LoginPage(driver);
     }
 }
