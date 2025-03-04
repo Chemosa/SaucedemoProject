@@ -4,63 +4,46 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class CartTest extends BaseTest {
+public class CartTest extends Preconditions {
 
     @Test (description = "Test that one product can be added to the Shopping cart.")
     public void addOneProductToCart() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addToCart(SAUCE_LABS_BACKPACK)
-                .openShoppingCart();
-        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
-        Assert.assertEquals(cartPage.getProductPriceFromCart(SAUCE_LABS_BACKPACK), "$29.99");
+        productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BACKPACK);
+        headerSteps.openShoppingCart();
+        softAssert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
+        softAssert.assertEquals(cartPage.getProductPriceFromCart(SAUCE_LABS_BACKPACK), "$29.99");
+        softAssert.assertAll();
     }
 
     @Test (description = "Test that few products can be added to the Shopping cart.")
     public void addFewProductsToCart() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addToCart(SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT)
-                .openShoppingCart();
-        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
-        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BIKE_LIGHT), SAUCE_LABS_BIKE_LIGHT);
+        productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
+        headerSteps.openShoppingCart();
+        softAssert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
+        softAssert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BIKE_LIGHT), SAUCE_LABS_BIKE_LIGHT);
+        softAssert.assertAll();
     }
 
     @Test (description = "Check that product can be removed from Shopping cart.")
     public void removeProductFromCart() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addToCart(SAUCE_LABS_BACKPACK)
-                .openShoppingCart()
-                .clickRemoveButton(SAUCE_LABS_BACKPACK);
+        productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BACKPACK);
+        headerSteps.openShoppingCart();
+        cartPage.clickRemoveButton(SAUCE_LABS_BACKPACK);
         Assert.assertTrue(cartPage.listOfProductsInCart().isEmpty());
     }
 
     @Test (description = "Check that Shopping cart initially is empty.")
     public void openShoppingCart() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .openShoppingCart();
+        productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BACKPACK);
+        headerSteps.openShoppingCart();
         Assert.assertTrue(cartPage.listOfProductsInCart().isEmpty());
     }
 
     @Test (description = "Check work of 'Continue Shopping' button")
     public void clickContinueShoppingButton() {
-        loginPage
-                .openPage(LOGIN_PAGE_URL);
-        loginPage
-                .login(USERNAME, PASSWORD)
-                .addToCart(SAUCE_LABS_BACKPACK)
-                .openShoppingCart()
-                .clickContinueShopping();
+        productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BACKPACK);
+        headerSteps.openShoppingCart();
+        cartPage.clickContinueShopping();
         Assert.assertEquals(driver.getCurrentUrl(), PRODUCTS_PAGE_URL);
     }
 }

@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+@Log4j2
 public class CartPage extends HeaderPage {
     private static final String PRODUCT_ITEM = "//*[text()='%s']/ancestor::*[@class=\"cart_item\"]";
     private static final String PRODUCT_NAME = "//*[text()='%s']";
@@ -18,7 +20,6 @@ public class CartPage extends HeaderPage {
     @FindBy(id = "continue-shopping")
     WebElement continueShoppingButton;
 
-
     public CartPage(WebDriver driver) {
         super(driver);
     }
@@ -29,7 +30,9 @@ public class CartPage extends HeaderPage {
      * @return
      */
     public String getProductNameFromCart(String productName) {
-        return driver.findElement(By.xpath(String.format(PRODUCT_NAME, productName))).getText();
+        String productNameInCart = driver.findElement(By.xpath(String.format(PRODUCT_NAME, productName))).getText();
+        log.info("Name of product in cart: {}", productNameInCart);
+        return productNameInCart;
     }
 
     /**
@@ -38,7 +41,9 @@ public class CartPage extends HeaderPage {
      * @return
      */
     public String getProductPriceFromCart(String productName) {
-        return driver.findElement(By.xpath(String.format(PRODUCT_PRICE, productName))).getText();
+        String productPrice = driver.findElement(By.xpath(String.format(PRODUCT_PRICE, productName))).getText();
+        log.info("Get price of the product: {}. Price is: {}", productName, productPrice);
+        return productPrice;
     }
 
     /**
@@ -56,6 +61,7 @@ public class CartPage extends HeaderPage {
      */
     public CartPage clickRemoveButton(String productName) {
         driver.findElement(By.xpath(String.format(REMOVE_BUTTON, productName))).click();
+        log.info("Remove product '{}' from cart", productName);
         return new CartPage(driver);
     }
 
