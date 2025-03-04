@@ -20,7 +20,6 @@ public class CartPage extends HeaderPage {
     @FindBy(id = "continue-shopping")
     WebElement continueShoppingButton;
 
-
     public CartPage(WebDriver driver) {
         super(driver);
     }

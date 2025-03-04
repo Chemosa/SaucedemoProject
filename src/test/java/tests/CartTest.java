@@ -10,16 +10,18 @@ public class CartTest extends Preconditions {
     public void addOneProductToCart() {
         productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BACKPACK);
         headerSteps.openShoppingCart();
-        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
-        Assert.assertEquals(cartPage.getProductPriceFromCart(SAUCE_LABS_BACKPACK), "$29.99");
+        softAssert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
+        softAssert.assertEquals(cartPage.getProductPriceFromCart(SAUCE_LABS_BACKPACK), "$29.99");
+        softAssert.assertAll();
     }
 
     @Test (description = "Test that few products can be added to the Shopping cart.")
     public void addFewProductsToCart() {
         productsSteps.loginAndAddProductToCart(userSuccess, SAUCE_LABS_BACKPACK, SAUCE_LABS_BIKE_LIGHT);
         headerSteps.openShoppingCart();
-        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
-        Assert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BIKE_LIGHT), SAUCE_LABS_BIKE_LIGHT);
+        softAssert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BACKPACK), SAUCE_LABS_BACKPACK);
+        softAssert.assertEquals(cartPage.getProductNameFromCart(SAUCE_LABS_BIKE_LIGHT), SAUCE_LABS_BIKE_LIGHT);
+        softAssert.assertAll();
     }
 
     @Test (description = "Check that product can be removed from Shopping cart.")

@@ -27,7 +27,6 @@ public class ProductsPage extends HeaderPage {
             driver.findElement(By.xpath(String.format(ADD_PRODUCT_TO_CART_BUTTON, productName))).click();
             log.info("Product '{}' was added to the Shopping cart.", productName);
         }
-
         return this;
     }
 

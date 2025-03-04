@@ -10,6 +10,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
+import org.testng.asserts.SoftAssert;
 import pages.*;
 import steps.CartSteps;
 import steps.HeaderSteps;
@@ -29,6 +30,7 @@ public class BaseTest implements IConstants, ITestConstants {
     ProductsSteps productsSteps;
     HeaderSteps headerSteps;
     CartSteps cartSteps;
+    SoftAssert softAssert;
 
     @BeforeMethod
     public void initTest(ITestContext iTestContext) {
@@ -38,12 +40,12 @@ public class BaseTest implements IConstants, ITestConstants {
         options.addArguments("--headless");
         options.addArguments("--window-size=1920, 1080");
 
-
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         initPages();
         iTestContext.setAttribute("driver", driver);
+        softAssert = new SoftAssert();
     }
 
     public void initPages() {
