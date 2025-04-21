@@ -12,7 +12,7 @@ public class LoginTest extends Preconditions {
     @Test(description = "QA-1 This test login on site without username")
     public void loginWithEmptyUsernameTest() {
         loginSteps.loginAndWaitForPageOpened(userWithEmptyUsername);
-        Assert.assertEquals(loginPage.getErrorMessageText(), "dhvdjvbdjvd");
+        Assert.assertEquals(loginPage.getErrorMessageText(), EMPTY_IN_FIELD_USERNAME_ERROR_TEXT);
     }
 
     @Test (description = "This test login on site without password")
