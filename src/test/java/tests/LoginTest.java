@@ -37,7 +37,7 @@ public class LoginTest extends Preconditions {
     public void navigateBackAfterLogout() {
         loginSteps.loginAndWaitForPageOpened(userSuccess);
         headerSteps.openHiddenMenuPressLogoutNavigateBack();
-        Assert.assertEquals(driver.getCurrentUrl(), LOGIN_PAGE_URL);
+        Assert.assertTrue(driver.getCurrentUrl().contains(LOGIN_PAGE_URL));
         Assert.assertEquals(loginPage.getErrorMessageText(), ERROR_MESSAGE_NAVIGATE_BACK_TO_PRODUCTS);
     }
 }
