@@ -15,6 +15,6 @@ public class Waiter {
 
     public void waitForPageOpened(WebDriver driver, String url, long seconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(seconds));
-        wait.until(ExpectedConditions.urlToBe(url));
+        wait.until(ExpectedConditions.urlContains(url));
     }
 }
